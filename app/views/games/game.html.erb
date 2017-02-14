@@ -1,0 +1,36 @@
+<h1>Game</h1>
+
+<form class="attempt" action="score" method="get">
+<div class="grid-container">
+  <% @grid.letters.each do |letter|%>
+  <div class="letter unselected"><%=letter%></div>
+  <%end%>
+</div>
+
+<div class="word-container">
+  <% @grid.letters.each do |letter|%>
+  <div class="word undone"></div>
+  <%end%>
+</div>
+
+  <input type="text" name="attempt" class="formText" style="visibility:hidden">
+  <input type="submit" value="Submit">
+</form>
+
+<script type="text/javascript">
+  var cardIndex = 1;
+  var wordCompo = "";
+
+  $('.letter').click(function(event) {
+    $(this).toggleClass('unselected');
+    var selectedLetter = $(this).text();
+    $('.word.undone:nth-child('+ cardIndex +')').text(selectedLetter);
+    $('.word.undone:nth-child('+ cardIndex +')').toggleClass('undone');
+    cardIndex += 1;
+    wordCompo += selectedLetter;
+    $(".formText").val(wordCompo);
+  });
+
+</script>
+
+
